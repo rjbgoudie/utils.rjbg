@@ -13,31 +13,44 @@
 #' @param x a data frame
 #' @param missingValues A character vector, listing the values of the factors
 #'   that correspond to missing values.
-#' @return ...
+#' @return The supplied data frame with rows that include a missing value
+#'   removed.
 #' @examples
 #' dat <- esoph[, 1:3]
 #' # done
 #' @export
-removeMissingWithSummary <- function(x, missingValues){
-  incomplete <- list()
+missingnessRemove <- function(x, missingValues){
+  colNames <- names(x)
   
-  for (col in names(x)){
-    incomplete[[col]] <- which(x[, col] %in% missingValues)
-  }
+  missingRowsByColumn <- unlist(sapply(x, whichMissing, missingValues))
   
-  sort(unlist(lapply(incomplete, length)), dec = T)
+  allMissing <- unlist(missingRowsByColumn)
+  x <- x[-allMissing, ]
+  x <- data.frame(lapply(x, factor))
+  x
+}
+
+#' Summary of missingness
+#' 
+#' Returns a summary of what is removed through missingness, by column.
+#' 
+#' @param x a data frame
+#' @param missingValues A character vector, listing the values of the factors
+#'   that correspond to missing values.
+#' @return A data frame including information about the missingness.
+#' @examples
+#' dat <- esoph[, 1:3]
+#' # done
+#' @export
+missingnessSummary <- function(x, missingValues){
+  missingRowsByColumn <- sapply(x, whichMissing, missingValues)
+  numberMissing <- sapply(missingRowsByColumn, length)
   
-  x <- x[-unlist(incomplete), ]
-  
-  # relevel
-  for (i in seq_along(names(x))){
-    x[, names(x)[i]] <- factor(x[, names(x)[i]])
-  }
-  
-  ignoreCols <- which(names(v1) %in% c("AID"))
-  v1[, -ignoreCols] <- lapply(names(v1[, -ignoreCols]), changeLevels, v1, 
-                relevelChanges)
-  dat <- v1
+  data.frame(`Missing`   = numberMissing)
+}
+
+whichMissing <- function(x, missingValues){
+  which(x %in% missingValues)
 }
 
 #' Convert NA to string "NA"
