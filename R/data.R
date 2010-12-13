@@ -72,14 +72,19 @@ changeLevels <- function(x, levelChanges, allowMissingCols = F, verbose = T){
       
       areNotOKMissingCols <- length(missingColsButNotOK) > 0
       if (isTRUE(areNotOKMissingCols)){
-        msg <- paste("The following columns are missing from levelChanges:", 
-                    missingColsButNotOK, collapse = "")
+        missingString <- paste(missingColsButNotOK, collapse = ", ")
+        missingDput <- capture.output(dput(missingColsButNotOK))
+        msg <- paste("The following columns are missing from levelChanges: ", 
+                     missingString, "\n As a vector: ", missingDput, sep = "")
         stop(msg)
       }
     }
     else {
-      msg <- paste("The following columns are missing from levelChanges:", 
-                   missingCols, collapse = "")
+      missingString <- paste(missingCols, collapse = ", ")
+      missingDput <- capture.output(dput(missingCols))
+      msg <- paste("The following columns are missing from levelChanges: ", 
+                   missingString, "\n As a vector: ", missingDput, sep = "")
+                  
       if (isTRUE(allowMissingCols)){
         warning(msg)
       }

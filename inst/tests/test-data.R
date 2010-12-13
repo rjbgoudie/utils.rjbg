@@ -107,6 +107,25 @@ test_that("Missing col", {
 })
 
 
+test_that("Missing cols", {
+  dat <- esoph[, 1:3]
+
+  # we can then change this into the following
+  levelChanges <- list(
+  agegp = c(
+    "25-34" = "Young",
+    "35-44" = "Young",
+    "45-54" = "Middle-aged",
+    "55-64" = "Middle-aged",
+    "65-74" = "Old",
+    "75+" = "Old")
+  )
+  
+  
+  expect_that(changeLevels(dat, levelChanges, verbose = F),
+              throws_error("alcgp, tobgp"))
+})
+
 test_that("Missing col, with this allowed", {
   dat <- esoph[, 1:3]
 
