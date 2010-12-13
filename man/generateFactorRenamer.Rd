@@ -3,25 +3,25 @@
 \title{Generate a factor renamer...}
 \usage{generateFactorRenamer(x)}
 \description{Generate a factor renamer}
-\details{Creates a template from which a specification of the renaming of the levels of 
-factor variables in a data.frame can be.
+\details{Creates a template from which a specification of the renaming of the 
+levels of factor variables in a data.frame can be.
 
-Suppose we have a data frame \code{x}, composed of a number of factor variables 
-(in columns).
-These factor variables are poorly named. For example, they may just be named by 
-by integers. We would like to rename them so that their names are more helpful and 
-intuitive.
+Suppose we have a data frame \code{x}, composed of a number of factor 
+variables (in columns).
+These factor variables are poorly named. For example, they may just be 
+named by by integers. We would like to rename them so that their names 
+are more helpful and intuitive.
 
-To do this in a clear and repeatable manner, we will create an R list. Each 
-component of the list is given the name of a column of the data.frame \code{x}.
-Each of these components is a character vector, each component of which 
-refers to a level of the corresponding factor variable in \code{x}. 
-Each of these component of the vector is a character, taking the default 
-value of the current name of the factor level.
+To do this in a clear and repeatable manner, we will create an R list. 
+Each component of the list is given the name of a column of the 
+data.frame \code{x}. Each of these components is a character vector, each 
+component of which refers to a level of the corresponding factor variable 
+in \code{x}. Each of these component of the vector is a character, taking 
+the default value of the current name of the factor level.
 
 This function output such a list.
-The list can then be modified to specify the new level names, and the changes 
-made using function \code{\link{changeLevels}}.}
+The list can then be modified to specify the new level names, and the 
+changes made using function \code{\link{changeLevels}}.}
 \value{The R code to generate the list is output to the terminal.}
 \arguments{\item{x}{a data frame}}
 \examples{dat <- esoph[, 1:3]

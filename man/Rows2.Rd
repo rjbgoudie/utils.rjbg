@@ -8,4 +8,5 @@
 \arguments{\item{x}{a list}
 \item{which}{which element}
 \item{size}{the length of each sublist}
-\item{use.names}{logical, whether to use the names. It is faster not to use names}}
+\item{use.names}{logical, whether to use the names. It is faster not to 
+use names.}}

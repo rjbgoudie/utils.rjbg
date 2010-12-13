@@ -5,7 +5,8 @@
 #' @param x a list
 #' @param which which element
 #' @param size the length of each sublist
-#' @param use.names logical, whether to use the names. It is faster not to use names
+#' @param use.names logical, whether to use the names. It is faster not to 
+#'   use names.
 #' @return a list
 #' @export
 Rows2 <- function(x, which, size, use.names = F){

@@ -22,10 +22,12 @@ useOuterStrips <-
     par.settings <-
         modifyList(opar,
                    list(layout.heights =
-                        if (x$as.table) list(strip = c(strip.lines, rep(0, dimx[2]-1)))
+                        if (x$as.table) list(strip = c(strip.lines, 
+                            rep(0, dimx[2]-1)))
                         else list(strip = c(rep(0, dimx[2]-1), strip.lines)),
                         layout.widths =
-                        list(strip.left = c(strip.left.lines, rep(0, dimx[1]-1)))))
+                        list(strip.left = c(strip.left.lines, rep(0, 
+                          dimx[1]-1)))))
     if (is.character(strip))
         strip <- get(strip)
     if (is.logical(strip) && strip)
@@ -102,19 +104,22 @@ strip.default <-
         pushViewport(viewport(y = (which.given-0.5)/length(which.panel),
                               height = 1/length(which.panel),
                               clip = trellis.par.get("clip")$strip,
-                              name = paste("strip.default", which.given, sep = ".")))
+                              name = paste("strip.default", which.given, 
+                                           sep = ".")))
     else 
         pushViewport(viewport(x = 1 - (which.given-0.5)/length(which.panel),
                               width = 1/length(which.panel),
                               clip = trellis.par.get("clip")$strip,
-                              name = paste("strip.default", which.given, sep = ".")))
+                              name = paste("strip.default", which.given,
+                                           sep = ".")))
 
     gp.text <- 
         gpar(col = par.strip.text$col,
              alpha = par.strip.text$alpha,
              lineheight = par.strip.text$lineheight,
              fontfamily = par.strip.text$fontfamily,
-             fontface = chooseFace(par.strip.text$fontface, par.strip.text$font),
+             fontface = chooseFace(par.strip.text$fontface,
+                                   par.strip.text$font),
              cex = par.strip.text$cex)
 
     name <- var.name[which.given]
@@ -232,21 +237,27 @@ strip.default <-
         pushViewport(viewport(y = (which.given-0.5)/length(which.panel),
                               height = 1/length(which.panel),
                               clip = "off",
-                              name = paste("strip.default.off", which.given, sep = ".")))
+                              name = paste("strip.default.off", which.given,
+                                           sep = ".")))
     else 
         pushViewport(viewport(x = 1 - (which.given-0.5)/length(which.panel),
                               width = 1/length(which.panel),
                               clip = "off",
-                              name = paste("strip.default.off", which.given, sep = ".")))
+                              name = paste("strip.default.off", which.given,
+                                           sep = ".")))
 
 
     strip.border <- trellis.par.get("strip.border")
     ## draw border for strip
     grid.rect(gp =
-              gpar(col = rep(strip.border$col, length.out = which.given)[which.given],
-                   lty = rep(strip.border$lty, length.out = which.given)[which.given],
-                   lwd = rep(strip.border$lwd, length.out = which.given)[which.given],
-                   alpha = rep(strip.border$alpha, length.out = which.given)[which.given],
+              gpar(col = rep(strip.border$col,
+                             length.out = which.given)[which.given],
+                   lty = rep(strip.border$lty,
+                             length.out = which.given)[which.given],
+                   lwd = rep(strip.border$lwd,
+                             length.out = which.given)[which.given],
+                   alpha = rep(strip.border$alpha,
+                               length.out = which.given)[which.given],
                    fill = "transparent"))
     upViewport()
 }

@@ -7,15 +7,15 @@
 #' 
 #' @param x An object of class "trellis".
 #' @param strip A function, character string, or logical that would 
-#'   be appropriate strip and strip.left arguments respectively in a high level 
-#'   lattice function call (see xyplot). Note, however, that the strip function 
-#'   must be of the form of strip.default2. 
+#'   be appropriate strip and strip.left arguments respectively in a high 
+#'   level lattice function call (see xyplot). Note, however, that the strip 
+#'   function must be of the form of strip.default2. 
 #'   The equivalent of strip.custom here is strip.custom2.
 #' @param strip.left As strip, for the strips down the left.
-#' @param top Determines the number of strips that are drawn along the top of the plot.
-#'   Conditioning variables 1, ..., top will be displayed along the top of the plot 
-#'   (using strip), and variables top + 1, ..., dim(x) will be displayed along the 
-#'   left hand side of the plot.
+#' @param top Determines the number of strips that are drawn along the top 
+#'   of the plot. Conditioning variables 1, ..., top will be displayed along 
+#'   the top of the plot (using strip), and variables top + 1, ..., dim(x) 
+#'   will be displayed along the left hand side of the plot.
 #' @param strip.lines height of strips in number of lines; helpful for 
 #'   multi-line text or mathematical annotation in strips.
 #' @param strip.lines.left As strip.lines, for strips down the left.
@@ -42,13 +42,16 @@ useOuterStrips2 <-
       modifyList(opar,
                  list(layout.heights =
                       if (x$as.table){
-                        list(strip = c(strip.lines * top, rep(0, prod(leftdimx)-1)))
+                        list(strip = c(strip.lines * top, rep(0, 
+                                        prod(leftdimx)-1)))
                       }
                       else {
-                        list(strip = c(rep(0, prod(leftdimx)-1), strip.lines * top))
+                        list(strip = c(rep(0, prod(leftdimx)-1), 
+                                strip.lines * top))
                       },
                       layout.widths =
-                      list(strip.left = c(strip.left.lines * length(leftdimx), rep(0, prod(topdimx)-1)))))
+                      list(strip.left = c(strip.left.lines * length(leftdimx),
+                                        rep(0, prod(topdimx)-1)))))
   if (is.character(strip)){
       strip <- get(strip)
   }
@@ -164,14 +167,16 @@ strip.default2 <-
                               width = extent,
                               x = extent/2,
                               clip = trellis.par.get("clip")$strip,
-                              name = paste("strip.default", which.given, sep = ".")))
+                              name = paste("strip.default", which.given,
+                                           sep = ".")))
     else 
         pushViewport(viewport(x = 1 - (which.given-0.5)/length(which.panel),
                               width = 1/length(which.panel),
                               height = extent,
                               y = extent/2,
                               clip = trellis.par.get("clip")$strip,
-                              name = paste("strip.default", which.given, sep = ".")))
+                              name = paste("strip.default", which.given,
+                                           sep = ".")))
 
 
     gp.text <- 
@@ -179,7 +184,8 @@ strip.default2 <-
              alpha = par.strip.text$alpha,
              lineheight = par.strip.text$lineheight,
              fontfamily = par.strip.text$fontfamily,
-             fontface = lattice:::chooseFace(par.strip.text$fontface, par.strip.text$font),
+             fontface = lattice:::chooseFace(par.strip.text$fontface,
+                                             par.strip.text$font),
              cex = par.strip.text$cex)
 
     name <- var.name[which.given]
@@ -298,29 +304,35 @@ strip.default2 <-
                               width = extent,
                               x = extent/2,
                               clip = "off",
-                              name = paste("strip.default.off", which.given, sep = ".")))
+                              name = paste("strip.default.off", 
+                                           which.given, sep = ".")))
     else 
         pushViewport(viewport(x = 1 - (which.given-0.5)/length(which.panel),
                               width = 1/length(which.panel),
                               height = extent,
                               y = extent/2,
                               clip = "off",
-                              name = paste("strip.default.off", which.given, sep = ".")))
+                              name = paste("strip.default.off",
+                                           which.given, sep = ".")))
 
 
     strip.border <- trellis.par.get("strip.border")
     ## draw border for strip
     grid.rect(gp =
-              gpar(col = rep(strip.border$col, length.out = which.given)[which.given],
-                   lty = rep(strip.border$lty, length.out = which.given)[which.given],
-                   lwd = rep(strip.border$lwd, length.out = which.given)[which.given],
-                   alpha = rep(strip.border$alpha, length.out = which.given)[which.given],
+              gpar(col = rep(strip.border$col,
+                             length.out = which.given)[which.given],
+                   lty = rep(strip.border$lty,
+                             length.out = which.given)[which.given],
+                   lwd = rep(strip.border$lwd,
+                             length.out = which.given)[which.given],
+                   alpha = rep(strip.border$alpha,
+                               length.out = which.given)[which.given],
                    fill = "transparent"))
     upViewport()
 }
 
-paste.and.draw2 <- function(left, right, sep = " : ", horizontal = TRUE, center = TRUE, 
-    showl = TRUE, showr = TRUE, gp = gpar()) 
+paste.and.draw2 <- function(left, right, sep = " : ", horizontal = TRUE, 
+    center = TRUE, showl = TRUE, showr = TRUE, gp = gpar()) 
 {
     if (showl || showr) {
         shows <- showl && showr

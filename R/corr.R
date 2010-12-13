@@ -10,7 +10,8 @@ ucCor <- function(a, b){
   mu <- tab/sum(tab)
   mu_suma <- colSums(mu)
   mu_sumb <- rowSums(mu)
-  -sum(mu * (log(mu) - log(outer(mu_sumb, mu_suma))))/sum(mu_sumb * log(mu_sumb))
+  -sum(mu * (log(mu) - log(outer(mu_sumb, mu_suma))))/sum(mu_sumb * 
+       log(mu_sumb))
 }
 
 #' cramerV
@@ -22,5 +23,6 @@ ucCor <- function(a, b){
 #' @export
 cramerV <- function(a, b){
   tab <- table(factor(a),factor(b))
-  unname(sqrt((chisq.test(tab))$statistic/(sum(tab) * ( min( (nlevels(factor(a)) - 1), (nlevels(factor(b)) - 1))))))
+  unname(sqrt((chisq.test(tab))$statistic/(sum(tab) * ( min( 
+         (nlevels(factor(a)) - 1), (nlevels(factor(b)) - 1))))))
 }

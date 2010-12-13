@@ -1,13 +1,13 @@
 #' Convert \code{data.frame} of factors to integers
 #' 
 #' Converts a \code{data.frame} that consists columns of factors into a 
-#' \code{data.frame} consisting of integers. If useLevelNames is FALSE, numbering 
-#' starts at 0.
+#' \code{data.frame} consisting of integers. If useLevelNames is FALSE, 
+#' numbering starts at 0.
 #' 
 #' @param x an object of class \code{data.frame}
-#' @param useLevelNames logical, indicating whether the labels of the levels should be 
-#' be converted to integers. This only makes sense if the levels are integers stored as 
-#' characters. e.g. factor(c("3", "2", "3")).
+#' @param useLevelNames logical, indicating whether the labels of the levels 
+#' should be be converted to integers. This only makes sense if the levels 
+#' are integers stored as characters. e.g. factor(c("3", "2", "3")).
 #' @return The data.frame with columns converted to integers
 #' @export
 #' @examples
