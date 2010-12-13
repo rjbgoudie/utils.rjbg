@@ -9,5 +9,5 @@ Depends: lattice, R (>= 2.9)
 Imports: lattice
 License: GPL
 Collate: 'corr.R' 'data.frame.R' 'data.R' 'list.R' 'logsumexp.R'
-    'matrix.R' 'missing.R' 'profr.R' 'sets.R' 'table.R'
+    'matrix.R' 'missing.R' 'profr.R' 'roxygen.R' 'sets.R' 'table.R'
     'useOuterStrips.R' 'useOuterStrips2.R'
