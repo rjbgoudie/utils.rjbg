@@ -1,16 +1,30 @@
 \name{useOuterStrips2}
 \alias{useOuterStrips2}
 \title{Put Strips on the Boundary of a Lattice Display...}
-\usage{useOuterStrips2(x, strip=strip.default2,
-    strip.left=strip.custom2(horizontal = horizontal), top=1,
-    strip.lines=1, strip.left.lines=strip.lines, horizontal=F)}
+\usage{useOuterStrips2(x, strip=strip.default2, strip.left=strip.custom2(horizontal =
+    horizontal), top=1, strip.lines=1, strip.left.lines=strip.lines,
+    horizontal=F)
+useOuterStrips2(x, strip=strip.default2, strip.left=strip.custom2(horizontal =
+    horizontal), top=1, strip.lines=1, strip.left.lines=strip.lines,
+    horizontal=F)
+}
 \description{Put Strips on the Boundary of a Lattice Display}
 \details{Try to update a "trellis" object so that strips are only shown on the 
 top and left boundaries when printed, instead of in every panel as is 
 usual. This version extend the version in LatticeExtra to allow more than 
-two conditioning variables.}
+two conditioning variables.\code{useOuterStrips2}: Try to update a "trellis" object so that strips are only shown on the 
+top and left boundaries when printed, instead of in every panel as is 
+usual. This version extend the version in LatticeExtra to allow more than 
+two conditioning variables.
+
+
+}
 \value{An object of class "trellis", essentially the same as x, but with 
-certain properties modified.}
+certain properties modified.\code{useOuterStrips2}: An object of class "trellis", essentially the same as x, but with 
+certain properties modified.
+
+
+}
 \arguments{\item{x}{An object of class "trellis".}
 \item{strip}{A function, character string, or logical that would 
 be appropriate strip and strip.left arguments respectively in a high level 
@@ -24,4 +38,8 @@ Conditioning variables 1, ..., top will be displayed along the top of the plot
 left hand side of the plot.}
 \item{strip.lines}{height of strips in number of lines; helpful for 
 multi-line text or mathematical annotation in strips.}
-\item{strip.lines.left}{As strip.lines, for strips down the left.}}
+\item{strip.lines.left}{As strip.lines, for strips down the left.}
+}
+
+\alias{useOuterStrips2}
+

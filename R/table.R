@@ -1,3 +1,9 @@
+#' table2
+#'
+#' ...
+#' 
+#' @param data ...
+#' @param whichCols ...
 #' @export
 table2 <- function(data, whichCols){
   # Must start at 0.

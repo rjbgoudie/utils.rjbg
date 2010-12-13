@@ -15,9 +15,10 @@
 #' nums <- as.factor(c("1", "2", "3"))
 #' vars <- as.factor(c("3", "2", "1"))
 #' x <- data.frame(letters = lets, numbers = nums, vars = vars)
-#' fdfAsInt(x, useLevelNames = F)
+#' fdfAsInt(x, useLevelNames = FALSE)
 #' \dontrun{fdfAsInt(x)}
 #' fdfAsInt(x[, 2:3])
+#' # returns a data.frame
 fdfAsInt <- function(x, useLevelNames = T){
   stopifnot(
     class(x) == "data.frame",

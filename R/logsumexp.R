@@ -1,3 +1,8 @@
+#' logsumexp
+#'
+#' ...
+#' 
+#' @param a ...
 #' @export
 logsumexp <- function(a){
   # returns log(sum(exp(a)))
