@@ -1,16 +1,7 @@
 \name{notdiag}
 \alias{notdiag}
 \title{notdiag...}
-\usage{notdiag(mx)
-notdiag(mx)
-}
+\usage{notdiag(mx)}
 \description{notdiag}
-\details{...\code{notdiag}: ...
-
-
-}
-\arguments{\item{mx}{...}
-}
-
-\alias{notdiag}
-
+\details{...}
+\arguments{\item{mx}{...}}

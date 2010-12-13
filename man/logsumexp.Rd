@@ -1,16 +1,7 @@
 \name{logsumexp}
 \alias{logsumexp}
 \title{logsumexp...}
-\usage{logsumexp(a)
-logsumexp(a)
-}
+\usage{logsumexp(a)}
 \description{logsumexp}
-\details{...\code{logsumexp}: ...
-
-
-}
-\arguments{\item{a}{...}
-}
-
-\alias{logsumexp}
-
+\details{...}
+\arguments{\item{a}{...}}

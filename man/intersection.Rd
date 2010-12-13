@@ -1,18 +1,9 @@
 \name{intersection}
 \alias{intersection}
 \title{a multiple intersection function...}
-\usage{intersection(x, y, ...)
-intersection(x, y, ...)
-}
+\usage{intersection(x, y, ...)}
 \description{a multiple intersection function}
-\details{...\code{intersection}: ...
-
-
-}
+\details{...}
 \arguments{\item{x}{...}
 \item{y}{...}
-\item{...}{...}
-}
-
-\alias{intersection}
-
+\item{...}{...}}
