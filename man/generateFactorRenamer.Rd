@@ -1,7 +1,7 @@
 \name{generateFactorRenamer}
 \alias{generateFactorRenamer}
 \title{Generate a factor renamer...}
-\usage{generateFactorRenamer(x)}
+\usage{generateFactorRenamer(x, newlines="level")}
 \description{Generate a factor renamer}
 \details{Creates a template from which a specification of the renaming of the 
 levels of factor variables in a data.frame can be.
@@ -23,7 +23,11 @@ This function output such a list.
 The list can then be modified to specify the new level names, and the 
 changes made using function \code{\link{changeLevels}}.}
 \value{The R code to generate the list is output to the terminal.}
-\arguments{\item{x}{a data frame}}
+\arguments{\item{x}{a data frame}
+\item{newlines}{A character variable. Either \code{"variable"} or
+\code{"level"}. In the former case, each variable is one a separate
+line in the result. In the latter case, newlines are additionally
+placed after each level.}}
 \examples{dat <- esoph[, 1:3]
 generateFactorRenamer(dat)
 

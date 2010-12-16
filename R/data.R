@@ -107,6 +107,10 @@ changeLevels <- function(x, levelChanges, allowMissingCols = F, verbose = T){
 #' changes made using function \code{\link{changeLevels}}.
 #' 
 #' @param x a data frame
+#' @param newlines A character variable. Either \code{"variable"} or
+#'   \code{"level"}. In the former case, each variable is one a separate
+#'   line in the result. In the latter case, newlines are additionally
+#'   placed after each level.
 #' @return The R code to generate the list is output to the terminal.
 #' @examples
 #' 
@@ -136,8 +140,8 @@ changeLevels <- function(x, levelChanges, allowMissingCols = F, verbose = T){
 #' changeLevels(dat, levelChanges)
 #' # this return the new data frame
 #' @export
-generateFactorRenamer <- function(x){
-  stringComponents <- lapply(names(x), levelsStringForColName, x)
+generateFactorRenamer <- function(x, newlines = "level"){
+  stringComponents <- lapply(names(x), levelsStringForColName, x, newlines)
   out <- paste(unlist(stringComponents), collapse = "")
   
   # remove trailing comma and newline
@@ -274,7 +278,7 @@ is.consistent.changeLevels <- function(x, levelChanges, allowMissingCols){
     problemCols <- colsToProcess[levelsNotOk]
     msg <- paste("There is a mismatch between the existing levels and the ",
                  "levelChanges of the following columns: ", 
-                 paste(problemCols, sep = ", "), sep = "")
+                 paste(problemCols, collapse = ", "), sep = "")
     stop(msg)
   }
   
@@ -288,9 +292,13 @@ is.consistent.changeLevels <- function(x, levelChanges, allowMissingCols){
 #' @param colName A character vector of length 1, indicating which column 
 #'   of \code{x} the string should be created for.
 #' @param x a data frame
+#' @param newlines A character variable. Either \code{"variable"} or
+#'   \code{"level"}. In the former case, each variable is one a separate
+#'   line in the result. In the latter case, newlines are additionally
+#'   placed after each level.
 #' @return A character vector. This is an individual component of the list 
 #'   described in \code{\link{generateFactorRenamer}}.
-levelsStringForColName <- function(colName, x){
+levelsStringForColName <- function(colName, x, newlines = "level"){
   
   # get the levels of the relevant column
   colLevels <- levels(x[, colName])
@@ -299,6 +307,16 @@ levelsStringForColName <- function(colName, x){
   quotedLevels <- sapply(colLevels, function(q){
     paste("\"", q, "\"", sep = "")
   })
+
+  collapse_string <- if (newlines == "variable"){
+    ", "
+  } else if (newlines == "level") {
+    ",\n    "
+  } else {
+    warning("Unrecognised 'newline' value. Using default of 'level'")
+    ",\n    "
+  }
+  
   allQuotedLevels <- paste(quotedLevels, " = ", quotedLevels,
                            collapse = ", ", sep = "")
   allQuotedLevels <- paste("c(", allQuotedLevels, ")", sep = "")
@@ -309,5 +327,5 @@ levelsStringForColName <- function(colName, x){
   
   names(allQuotedLevels) <- colName
   allQuotedLevels
-  paste("\t", colName, " = ", allQuotedLevels, ",\n", sep = "")
+  paste("  ", colName, " = ", allQuotedLevels, ",\n", sep = "")
 }
