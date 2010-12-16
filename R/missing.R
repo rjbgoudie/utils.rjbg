@@ -67,7 +67,7 @@ naToString <- function(x){
   stopifnot(class(x) == "data.frame",
             all(sapply(x, class) == "factor"))
   
-  data.frame(lapply(wave1, function(col) {
+  data.frame(lapply(x, function(col) {
     col <- as.character(col)
     col[is.na(col)] <- "NA"
     factor(col)
