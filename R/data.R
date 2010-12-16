@@ -189,7 +189,7 @@ changeLevelsColName <- function(colName, x, levelChanges, verbose = T){
   
   sortedNewLevels <- colLevelChanges[matchLevels]
   levels(x[, colName]) <- sortedNewLevels
-  x[, colName] <- factor(x[, colName])
+  x[, colName] <- factor(x[, colName], levels = unique(colLevelChanges))
   x[, colName]
 }
 
