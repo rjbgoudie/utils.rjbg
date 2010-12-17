@@ -7,8 +7,8 @@ Maintainer: R.J.B. Goudie <rjbgoudie@gmail.com>
 Description: Miscellaneous utility functions.
 Depends: lattice, R (>= 2.9)
 Suggests: roxygen
-Imports: lattice
+Imports: lattice, plyr
 License: GPL
 Collate: 'corr.R' 'data.frame.R' 'data.R' 'list.R' 'logsumexp.R'
     'matrix.R' 'memory.R' 'missing.R' 'profr.R' 'roxygen.R' 'sets.R'
-    'table.R' 'useOuterStrips.R' 'useOuterStrips2.R'
+    'table.R' 'useOuterStrips.R' 'useOuterStrips2.R' 'utils.rjbg.R'

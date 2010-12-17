@@ -54,6 +54,44 @@ test_that("Basics", {
   expect_that(changeLevels(dat, levelChanges, verbose = F), is_identical_to(expected))
 })
 
+test_that("basics", {
+  dat <- esoph[, 1:3]
+  levelChanges <- list(
+  agegp = c(
+    "25-34" = "Young",
+    "35-44" = "Young",
+    "45-54" = "Middle-aged",
+    "55-64" = "Middle-aged",
+    "65-74" = "Old",
+    "75+" = "Old"),
+  alcgp = c(
+    "0-39g/day" = "0-39g/day",
+    "40-79" = "40-79",
+    "80-119" = "80-119",
+    "120+" = "120+"),
+  tobgp = c(
+    "0-9g/day" = "Light",
+    "10-19" = "Medium",
+    "20-29" = "Heavy",
+    "30+" = "Heavy")
+  )
+  
+  processing_output <- 
+    paste("Processing: \r  |                               ", 
+    "                                             \r  |",
+    "=======================                            ",
+    "                   |  33%\r  |                     ", 
+    "                                                    ",
+    "   \r  |===============================================  ", 
+    "                     |  67%\r  |                          ",
+    "                                                ",
+    "  \r  |============================================",
+    "==========================| 100%", sep = "")
+  
+  expect_that(capture.output(changeLevels(dat, levelChanges, verbose = T))[1], 
+              is_identical_to(processing_output))
+})
+
 test_that("Missing level", {
   dat <- esoph[, 1:3]
 
@@ -282,3 +320,66 @@ test_that("Reordering", {
   expect_that(levels(changeLevels(dat, levelChanges, verbose = F)[, 1]),
               is_identical_to(expected))
 })
+
+
+test_that("Multiple incorrect levels, should report all", {
+  dat <- esoph[, 1:3]
+  
+  # we can then change this into the following
+  levelChanges <- list(
+  agegp = c(
+    "25-34" = "Young",
+    "35-44" = "Young",
+    "45-54" = "Middle-aged",
+    "55-64" = "Middle-aged",
+    "65-74" = "Old",
+    "75+" = "Old",
+    "xxxxxxxxx" = "xxxxxxx"),
+  alcgp = c(
+    "0-39g/day" = "0-39g/day",
+    "40-79" = "40-79",
+    "80-119" = "80-119",
+    "120+" = "120+"),
+  tobgp = c(
+    "0-9g/day" = "Light",
+    "10-19" = "Medium",
+    "20-29" = "Heavy",
+    "30+" = "Heavy",
+    "xxxxxxxxx" = "xxxxxxx")
+  )
+  
+  expect_that(changeLevels(dat, levelChanges),
+              throws_error("the following columns: agegp, tobgp"))
+})
+
+
+test_that("Mixture of unneeded and missing", {
+  dat <- esoph[, 1:3]
+  
+  # we can then change this into the following
+  levelChanges <- list(
+  agegp = c(
+    "25-34" = "Young",
+    "35-44" = "Young",
+    "45-54" = "Middle-aged",
+    "55-64" = "Middle-aged",
+    "65-74" = "Old"),
+  alcgp = c(
+    "0-39g/day" = "0-39g/day",
+    "40-79" = "40-79",
+    "80-119" = "80-119",
+    "120+" = "120+",
+    "xxxxx" = "xxxxxx"),
+  tobgp = c(
+    "0-9g/day" = "Light",
+    "10-19" = "Medium",
+    "30+" = "Heavy",
+    "xxxxxxxxx" = "xxxxxxx")
+  )
+  
+  expect_that(changeLevels(dat, levelChanges),
+              throws_error(paste("Missing from proposed: 20-29", 
+                                 "Unneeded in proposed: xxxxxxxxx",
+                                 sep = "\n")))
+})
+
