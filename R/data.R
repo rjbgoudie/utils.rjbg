@@ -278,7 +278,7 @@ is.consistent.changeLevels <- function(x, levelChanges, allowMissingCols){
     problemCols <- colsToProcess[levelsNotOk]
     msg <- paste("There is a mismatch between the existing levels and the ",
                  "levelChanges of the following columns: ", 
-                 paste(problemCols, collapse = ", "), sep = "")
+                 paste(problemCols, sep = ", "), sep = "")
     stop(msg)
   }
   
@@ -311,14 +311,14 @@ levelsStringForColName <- function(colName, x, newlines = "level"){
   collapse_string <- if (newlines == "variable"){
     ", "
   } else if (newlines == "level") {
-    ",\n    "
+    ",\n  "
   } else {
     warning("Unrecognised 'newline' value. Using default of 'level'")
-    ",\n    "
+    ",\n  "
   }
   
   allQuotedLevels <- paste(quotedLevels, " = ", quotedLevels,
-                           collapse = ", ", sep = "")
+                           collapse = collapse_string, sep = "")
   allQuotedLevels <- paste("c(", allQuotedLevels, ")", sep = "")
   
   # nc <- nchar(allQuotedLevels)
@@ -327,5 +327,5 @@ levelsStringForColName <- function(colName, x, newlines = "level"){
   
   names(allQuotedLevels) <- colName
   allQuotedLevels
-  paste("  ", colName, " = ", allQuotedLevels, ",\n", sep = "")
+  paste(colName, " = ", allQuotedLevels, ",\n", sep = "")
 }
