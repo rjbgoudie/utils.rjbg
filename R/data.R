@@ -128,6 +128,8 @@ changeLevels <- function(x, levelChanges, allowMissingCols = F, verbose = T){
 #'   \code{"level"}. In the former case, each variable is one a separate
 #'   line in the result. In the latter case, newlines are additionally
 #'   placed after each level.
+#' @param sort A logical indicating whether the levels should be sorted, 
+#'   according to their numeric order
 #' @return The R code to generate the list is output to the terminal.
 #' @examples
 #' 
@@ -157,8 +159,9 @@ changeLevels <- function(x, levelChanges, allowMissingCols = F, verbose = T){
 #' changeLevels(dat, levelChanges)
 #' # this return the new data frame
 #' @export
-generateFactorRenamer <- function(x, newlines = "level"){
-  stringComponents <- lapply(names(x), levelsStringForColName, x, newlines)
+generateFactorRenamer <- function(x, newlines = "level", sort = F){
+  stringComponents <- lapply(names(x),
+                             levelsStringForColName, x, newlines, sort)
   out <- paste(unlist(stringComponents), collapse = "")
   
   # remove trailing comma and newline
@@ -335,12 +338,22 @@ is.consistent.changeLevels <- function(x, levelChanges, allowMissingCols){
 #'   \code{"level"}. In the former case, each variable is one a separate
 #'   line in the result. In the latter case, newlines are additionally
 #'   placed after each level.
+#' @param sort A logical indicating whether the levels should be sorted, 
+#'   according to their numeric order
 #' @return A character vector. This is an individual component of the list 
 #'   described in \code{\link{generateFactorRenamer}}.
-levelsStringForColName <- function(colName, x, newlines = "level"){
+levelsStringForColName <- function(colName,
+                                   x,
+                                   newlines = "level", 
+                                   sort = F){
   
   # get the levels of the relevant column
   colLevels <- levels(x[, colName])
+  
+  if (sort){
+    o <- order(as.numeric(colLevels))
+    colLevels <- colLevels[o]
+  }
   
   # build up the character variable
   quotedLevels <- sapply(colLevels, function(q){
@@ -350,15 +363,15 @@ levelsStringForColName <- function(colName, x, newlines = "level"){
   collapse_string <- if (newlines == "variable"){
     ", "
   } else if (newlines == "level") {
-    ",\n    "
+    ",\n  "
   } else {
     warning("Unrecognised 'newline' value. Using default of 'level'")
-    ",\n    "
+    ",\n  "
   }
   
   allQuotedLevels <- paste(quotedLevels, " = ", quotedLevels,
-                           collapse = ", ", sep = "")
-  allQuotedLevels <- paste("c(", allQuotedLevels, ")", sep = "")
+                           collapse = collapse_string, sep = "")
+  allQuotedLevels <- paste("c(\n  ", allQuotedLevels, ")", sep = "")
   
   # nc <- nchar(allQuotedLevels)
   # allQuotedLevels <- allQuotedLevels[-(nc-1:nc)]
@@ -366,5 +379,5 @@ levelsStringForColName <- function(colName, x, newlines = "level"){
   
   names(allQuotedLevels) <- colName
   allQuotedLevels
-  paste("  ", colName, " = ", allQuotedLevels, ",\n", sep = "")
+  paste(colName, " = ", allQuotedLevels, ",\n", sep = "")
 }
