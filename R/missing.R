@@ -25,8 +25,10 @@ missingnessRemove <- function(x, missingValues){
   missingRowsByColumn <- unlist(sapply(x, whichMissing, missingValues))
   
   allMissing <- unlist(missingRowsByColumn)
-  x <- x[-allMissing, ]
-  x <- data.frame(lapply(x, factor))
+  if (length(allMissing) > 0){
+    x <- x[-allMissing, ]
+    x <- data.frame(lapply(x, factor))
+  }
   x
 }
 

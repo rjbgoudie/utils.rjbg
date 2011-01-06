@@ -1,4 +1,4 @@
-context("notdiag()")
+context("Remove missingness")
 
 test_that("Basics", {
   dat <- esoph[, 1:3]
@@ -25,6 +25,13 @@ test_that("Basics", {
   
   expect_that(missingnessRemove(dat, "40-79"),
               is_identical_to(expected))
+})
+
+test_that("No missing rows", {
+  dat <- esoph[, 1:3]
+  
+  expect_that(missingnessRemove(dat, "ZZZZMissing"),
+              is_identical_to(dat))
 })
 
 test_that("Summary", {
