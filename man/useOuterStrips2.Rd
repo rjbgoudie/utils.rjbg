@@ -24,4 +24,5 @@ the top of the plot (using strip), and variables top + 1, ..., dim(x)
 will be displayed along the left hand side of the plot.}
 \item{strip.lines}{height of strips in number of lines; helpful for 
 multi-line text or mathematical annotation in strips.}
-\item{strip.lines.left}{As strip.lines, for strips down the left.}}
+\item{strip.left.lines}{As strip.lines, for strips down the left.}
+\item{horizontal}{...}}

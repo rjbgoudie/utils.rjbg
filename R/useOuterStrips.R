@@ -68,6 +68,11 @@ useOuterStrips <-
            layout = dimx)
 }
 
+#' function title
+#' 
+#' description
+#' 
+#' @param ... ...
 strip.custom <-
     function(...)
 {
@@ -76,12 +81,28 @@ strip.custom <-
     {
         dots <- list(...)
         do.call("strip.default",
-                updateList(dots, args))
+                lattice:::updateList(dots, args))
     }
 }
 
 
-
+#' function title
+#' 
+#' description
+#' 
+#' @param which.given ...
+#' @param which.panel ...
+#' @param var.name ...
+#' @param factor.levels ...
+#' @param shingle.intervals ...
+#' @param strip.names ...
+#' @param strip.levels ...
+#' @param sep ...
+#' @param style ...
+#' @param horizontal ...
+#' @param bg ...
+#' @param fg ...
+#' @param par.strip.text ...
 strip.default <-
     function(which.given,
              which.panel,
@@ -101,24 +122,24 @@ strip.default <-
              par.strip.text = trellis.par.get("add.text"))
 {
     if (horizontal)
-        pushViewport(viewport(y = (which.given-0.5)/length(which.panel),
+        lattice:::pushViewport(lattice:::viewport(y = (which.given-0.5)/length(which.panel),
                               height = 1/length(which.panel),
                               clip = trellis.par.get("clip")$strip,
                               name = paste("strip.default", which.given, 
                                            sep = ".")))
     else 
-        pushViewport(viewport(x = 1 - (which.given-0.5)/length(which.panel),
+        lattice:::pushViewport(lattice:::viewport(x = 1 - (which.given-0.5)/length(which.panel),
                               width = 1/length(which.panel),
                               clip = trellis.par.get("clip")$strip,
                               name = paste("strip.default", which.given,
                                            sep = ".")))
 
     gp.text <- 
-        gpar(col = par.strip.text$col,
+        lattice:::gpar(col = par.strip.text$col,
              alpha = par.strip.text$alpha,
              lineheight = par.strip.text$lineheight,
              fontfamily = par.strip.text$fontfamily,
-             fontface = chooseFace(par.strip.text$fontface,
+             fontface = lattice:::chooseFace(par.strip.text$fontface,
                                    par.strip.text$font),
              cex = par.strip.text$cex)
 
@@ -149,20 +170,20 @@ strip.default <-
         ## 'style' will be completely ignored, and shingle.intervals
         ## encoded using bg and fg.  Names and levels are both game.
 
-        grid.rect(gp = gpar(fill = bg, col = bg))
+        lattice:::grid.rect(gp = lattice:::gpar(fill = bg, col = bg))
 
         t <- range(shingle.intervals)
         r <- (range(shingle.intervals[level,]) - t[1]) / diff(t)
         if (horizontal)
-            grid.rect(x = unit(r %*% c(.5,.5),"npc"),
-                      width = max(unit(c(diff(r), 1), c("npc", "mm"))),
-                      gp = gpar(col = fg, fill = fg))
+            lattice:::grid.rect(x = lattice:::unit(r %*% c(.5,.5),"npc"),
+                      width = max(lattice:::unit(c(diff(r), 1), c("npc", "mm"))),
+                      gp = lattice:::gpar(col = fg, fill = fg))
         else 
-            grid.rect(y = unit(r %*% c(.5,.5),"npc"),
-                      height = max(unit( c(diff(r), 1), c("npc", "mm"))),
-                      gp = gpar(col = fg, fill = fg))
+            lattice:::grid.rect(y = lattice:::unit(r %*% c(.5,.5),"npc"),
+                      height = max(lattice:::unit( c(diff(r), 1), c("npc", "mm"))),
+                      gp = lattice:::gpar(col = fg, fill = fg))
 
-        paste.and.draw(name, factor.levels[level],
+        lattice:::paste.and.draw(name, factor.levels[level],
                        sep = sep,
                        horizontal = horizontal,
                        showl = strip.names[2],
@@ -179,7 +200,7 @@ strip.default <-
         ## coloring:
 
         ## background: all except style = 2
-        if (style != 2) grid.rect(gp = gpar(fill = bg, col = bg))
+        if (style != 2) lattice:::grid.rect(gp = lattice:::gpar(fill = bg, col = bg))
 
         ## foreground: needed only for style = 2, 3 and 4
 
@@ -187,15 +208,15 @@ strip.default <-
         {
             if (horizontal)
             {
-                grid.rect(x = unit((2*level-1)/(2*num), "npc"),
-                          width = unit(1/num, "npc"),
-                          gp = gpar(fill = fg, col = fg))
+                lattice:::grid.rect(x = lattice:::unit((2*level-1)/(2*num), "npc"),
+                          width = lattice:::unit(1/num, "npc"),
+                          gp = lattice:::gpar(fill = fg, col = fg))
             }
             else
             {
-                grid.rect(y = unit((2*level-1)/(2*num), "npc"),
-                          height = unit(1/num, "npc"),
-                          gp = gpar(fill = fg, col = fg))
+                lattice:::grid.rect(y = lattice:::unit((2*level-1)/(2*num), "npc"),
+                          height = lattice:::unit(1/num, "npc"),
+                          gp = lattice:::gpar(fill = fg, col = fg))
             }
         }
 
@@ -203,7 +224,7 @@ strip.default <-
 
         if (style %in% c(1, 3))
         {
-            paste.and.draw(name, factor.levels[level],
+            lattice:::paste.and.draw(name, factor.levels[level],
                            sep = sep,
                            horizontal = horizontal,
                            showl = strip.names[1],
@@ -217,30 +238,30 @@ strip.default <-
             lid <- if (style %in% c(2, 4)) 1:num else level
             if (horizontal)
             {
-                grid.text(label = factor.levels[lid],
+                lattice:::grid.text(label = factor.levels[lid],
                           x = (2 * lid - 1) / (2 * num),
                           gp = gp.text)
             }
             else
             {
-                grid.text(label = factor.levels[lid],
+                lattice:::grid.text(label = factor.levels[lid],
                           y = (2 * lid - 1) / (2 * num),
                           rot = 90,
                           gp = gp.text)
             }
         }
     }
-    upViewport()
+    lattice:::upViewport()
 
     ## border is drawn with clipping off
     if (horizontal)
-        pushViewport(viewport(y = (which.given-0.5)/length(which.panel),
+        lattice:::pushViewport(lattice:::viewport(y = (which.given-0.5)/length(which.panel),
                               height = 1/length(which.panel),
                               clip = "off",
                               name = paste("strip.default.off", which.given,
                                            sep = ".")))
     else 
-        pushViewport(viewport(x = 1 - (which.given-0.5)/length(which.panel),
+        lattice:::pushViewport(lattice:::viewport(x = 1 - (which.given-0.5)/length(which.panel),
                               width = 1/length(which.panel),
                               clip = "off",
                               name = paste("strip.default.off", which.given,
@@ -249,8 +270,8 @@ strip.default <-
 
     strip.border <- trellis.par.get("strip.border")
     ## draw border for strip
-    grid.rect(gp =
-              gpar(col = rep(strip.border$col,
+    lattice:::grid.rect(gp =
+              lattice:::gpar(col = rep(strip.border$col,
                              length.out = which.given)[which.given],
                    lty = rep(strip.border$lty,
                              length.out = which.given)[which.given],
@@ -259,5 +280,5 @@ strip.default <-
                    alpha = rep(strip.border$alpha,
                                length.out = which.given)[which.given],
                    fill = "transparent"))
-    upViewport()
+    lattice:::upViewport()
 }

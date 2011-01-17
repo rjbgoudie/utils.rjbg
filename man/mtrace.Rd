@@ -1,4 +1,7 @@
 \name{mtrace}
 \alias{mtrace}
-\title{mtrace}
+\title{function title...}
 \usage{mtrace(f)}
+\description{function title}
+\details{description}
+\arguments{\item{f}{...}}

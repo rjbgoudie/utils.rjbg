@@ -1,7 +1,9 @@
 \name{sort.profr}
 \alias{sort.profr}
 \title{Sort profr...}
-\usage{sort.profr(pf)}
+\usage{\method{sort}{profr} (x, decreasing=T, ...)}
 \description{Sort profr}
 \details{...}
-\arguments{\item{pf}{...}}
+\arguments{\item{x}{...}
+\item{decreasing}{A logical}
+\item{...}{Further arguments (unused)}}

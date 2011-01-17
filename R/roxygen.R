@@ -6,7 +6,7 @@
 #' @export
 document <- function(pkg) 
 {
-  pkg <- as.package(pkg)
+  pkg <- testthat::as.package(pkg)
   require(roxygen)
   roxygenize(package.dir  = pkg$path,
             roxygen.dir   = pkg$path,

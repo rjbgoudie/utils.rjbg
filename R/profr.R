@@ -2,10 +2,13 @@
 #'
 #' ...
 #' 
-#' @param pf ...
+#' @param x ...
+#' @param decreasing A logical
+#' @param ... Further arguments (unused)
 #' @S3method sort profr
-sort.profr <- function(pf){
-  res <- data.frame(t = tapply(pf$t, pf$f, sum))
-  o <- order(res$t, decreasing = T)
+#' @method sort profr
+sort.profr <- function(x, decreasing = T, ...){
+  res <- data.frame(t = tapply(x$t, x$f, sum))
+  o <- order(res$t, decreasing = decreasing)
   data.frame(t = res[o, ])
 }

@@ -59,12 +59,23 @@
 #' changeLevels(dat, levelChanges)
 #' # this return the new data frame
 #' @export
-changeLevels <- function(x, levelChanges, allowMissingCols = F, verbose = T){
+changeLevels <- function(x,
+                         levelChanges,
+                         allowMissingCols = F,
+                         verbose = T){
   stopifnot(is.consistent.changeLevels(x, levelChanges, allowMissingCols),
             is.logical(verbose),
             length(verbose) == 1)
   colNames <- names(x)
   
+  # get the original levels, to avoid processing columns that do
+  # not change
+  actualLevelChanges <- levelChanges
+  xWithChanges <- x[, names(levelChanges)]
+  originalLevels <- capture.output(generateFactorRenamer(xWithChanges))
+  eval(parse(file = "", text = originalLevels))
+  originalLevels <- levelChanges
+  levelChanges <- actualLevelChanges
   
   if (isTRUE(verbose)){
     cat("Processing: ")
@@ -87,7 +98,11 @@ changeLevels <- function(x, levelChanges, allowMissingCols = F, verbose = T){
       progress$step()
     }
     
-    if (colName %in% colsToProcess){
+    shouldProcessCol <- colName %in% colsToProcess
+    levelsAreDifferent <- !identical(originalLevels[colName],
+                                    levelChanges[colName])
+    
+    if (shouldProcessCol && levelsAreDifferent){
       changeLevelsColName(colName, x, levelChanges, verbose)
     } else {
       x[, colName]

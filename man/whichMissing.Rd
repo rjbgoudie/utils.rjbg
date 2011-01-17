@@ -1,4 +1,8 @@
 \name{whichMissing}
 \alias{whichMissing}
-\title{whichMissing}
+\title{.}
 \usage{whichMissing(x, missingValues)}
+\description{....}
+\details{....}
+\arguments{\item{x}{...}
+\item{missingValues}{...}}

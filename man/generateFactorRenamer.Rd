@@ -1,7 +1,7 @@
 \name{generateFactorRenamer}
 \alias{generateFactorRenamer}
 \title{Generate a factor renamer...}
-\usage{generateFactorRenamer(x, newlines="level")}
+\usage{generateFactorRenamer(x, newlines="level", sort=F)}
 \description{Generate a factor renamer}
 \details{Creates a template from which a specification of the renaming of the 
 levels of factor variables in a data.frame can be.
@@ -27,7 +27,9 @@ changes made using function \code{\link{changeLevels}}.}
 \item{newlines}{A character variable. Either \code{"variable"} or
 \code{"level"}. In the former case, each variable is one a separate
 line in the result. In the latter case, newlines are additionally
-placed after each level.}}
+placed after each level.}
+\item{sort}{A logical indicating whether the levels should be sorted, 
+according to their numeric order}}
 \examples{dat <- esoph[, 1:3]
 generateFactorRenamer(dat)
 
