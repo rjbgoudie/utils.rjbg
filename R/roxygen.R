@@ -12,6 +12,5 @@ document <- function(pkg)
             roxygen.dir   = pkg$path,
             copy.package  = F,
             overwrite     = T,
-            unlink.target = T,
-            use.Rd2       = F)
+            unlink.target = T)
 }
