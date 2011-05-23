@@ -10,6 +10,6 @@ Suggests: roxygen
 Imports: lattice, plyr, testthat, devtools
 License: GPL
 Collate: 'corr.R' 'data.frame.R' 'data.R' 'list.R' 'logsumexp.R'
-    'matrix.R' 'memory.R' 'missing.R' 'profr.R' 'roxygen.R' 'sets.R'
+    'matrix.R' 'memory.R' 'missing.R' 'profr.R' 'sets.R'
     'stack.R' 'table.R' 'useOuterStrips.R' 'useOuterStrips2.R'
     'utils.rjbg.R'
