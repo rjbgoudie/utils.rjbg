@@ -2,6 +2,14 @@
 \alias{strip.custom2}
 \title{.}
 \usage{strip.custom2(...)}
-\description{...}
-\details{...}
-\arguments{\item{...}{...}}
+
+\description{
+  ...
+}
+
+\details{
+  ...
+}
+\arguments{
+  \item{...}{...}
+}
