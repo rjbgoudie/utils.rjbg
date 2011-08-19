@@ -26,7 +26,6 @@ Collate:
     'memory.R'
     'missing.R'
     'profr.R'
-    'roxygen.R'
     'sets.R'
     'stack.R'
     'table.R'
