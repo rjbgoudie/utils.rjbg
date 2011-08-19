@@ -7,7 +7,7 @@
 document <- function(pkg) 
 {
   pkg <- as.package(pkg)
-  require(roxygen)
+  require(roxygen2)
   roxygenize(package.dir  = pkg$path,
             roxygen.dir   = pkg$path,
             copy.package  = F,
