@@ -52,3 +52,23 @@ intAsFDF <- function(x){
   
   data.frame(lapply(x, as.factor))
 }
+
+#' Convert \code{table} a data.frame with repeated rows.
+#'
+#' Converts a \code{table} in a \code{data.frame} with rows consisting of
+#' the dimensions of the \code{table}, and the number rows as indicated by
+#' the \code{table}
+#'
+#' @param x an object of class \code{table}
+#' @return A \code{data.frame}.
+#' @export
+as.data.frame2.table <- function(x){
+  x <- as.data.frame(x)
+  f <- ncol(x)
+  out <- list()
+  for (i in seq_len(nrow(x))){
+    n <- x[i, "Freq"]
+    out[[i]] <- x[, -f]
+  }
+  do.call("rbind", out)
+}
