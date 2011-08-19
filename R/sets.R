@@ -8,7 +8,7 @@
 #' @export
 intersection <- function(x, y, ...){
   if (missing(y)){
-    unlist(x)
+    unique(unlist(x))
   }
    else {
     if (missing(...)) intersect(x, y)
