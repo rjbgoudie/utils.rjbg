@@ -1,7 +1,13 @@
 \name{parse_gcinfos}
 \alias{parse_gcinfos}
-\title{function title...}
-\usage{parse_gcinfos(str)}
-\description{function title}
-\details{description}
-\arguments{\item{str}{...}}
+\title{function title}
+\usage{
+  parse_gcinfos(str)
+}
+\arguments{
+  \item{str}{...}
+}
+\description{
+  description
+}
+

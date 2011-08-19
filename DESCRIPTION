@@ -1,15 +1,35 @@
 Package: utils.rjbg
-Type: Package
-Title: Miscellaneous utility functions
-Version: 1.1
-Author: R.J.B. Goudie <rjbgoudie@gmail.com>
+Imports:
+    lattice,
+    plyr,
+    testthat,
+    devtools
 Maintainer: R.J.B. Goudie <rjbgoudie@gmail.com>
-Description: Miscellaneous utility functions.
-Depends: lattice, R (>= 2.9)
-Suggests: roxygen
-Imports: lattice, plyr, testthat, devtools
 License: GPL
-Collate: 'corr.R' 'data.frame.R' 'data.R' 'list.R' 'logsumexp.R'
-    'matrix.R' 'memory.R' 'missing.R' 'profr.R' 'roxygen.R' 'sets.R'
-    'stack.R' 'table.R' 'useOuterStrips.R' 'useOuterStrips2.R'
+Title: Miscellaneous utility functions
+Type: Package
+Author: R.J.B. Goudie <rjbgoudie@gmail.com>
+Description: Miscellaneous utility functions.
+Version: 1.1
+Depends:
+    lattice,
+    R (>= 2.9)
+Suggests:
+    roxygen2
+Collate:
+    'corr.R'
+    'data.frame.R'
+    'data.R'
+    'list.R'
+    'logsumexp.R'
+    'matrix.R'
+    'memory.R'
+    'missing.R'
+    'profr.R'
+    'roxygen.R'
+    'sets.R'
+    'stack.R'
+    'table.R'
+    'useOuterStrips.R'
+    'useOuterStrips2.R'
     'utils.rjbg.R'

@@ -1,9 +1,17 @@
 \name{intAsFDF}
 \alias{intAsFDF}
-\title{Convert data...}
-\usage{intAsFDF(x)}
-\description{Convert \code{data.frame} of integers to factors}
-\details{Converts a \code{data.frame} that consists columns of integers into a 
-\code{data.frame} consisting of factors}
-\value{The data.frame with columns converted to factors}
-\arguments{\item{x}{an object of class \code{data.frame}}}
+\title{Convert \code{data.frame} of integers to factors}
+\usage{
+  intAsFDF(x)
+}
+\arguments{
+  \item{x}{an object of class \code{data.frame}}
+}
+\value{
+  The data.frame with columns converted to factors
+}
+\description{
+  Converts a \code{data.frame} that consists columns of
+  integers into a \code{data.frame} consisting of factors
+}
+

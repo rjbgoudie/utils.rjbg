@@ -1,6 +1,10 @@
-\name{Structural}
-\title{rjbg's utility package.}
-\description{rjbg's utility package.}
 \docType{package}
+\name{Structural}
+\alias{"package-rjbg-utils"}
 \alias{structural}
-\alias{package-rjbg-utils}
+\alias{Structural}
+\title{rjbg's utility package.}
+\description{
+  rjbg's utility package.
+}
+
