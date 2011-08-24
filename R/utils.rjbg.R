@@ -1,6 +1,6 @@
 #' rjbg's utility package.
 #' 
-#' @import lattice plyr testthat devtools
+#' @import lattice plyr testthat
 #' @docType package
 #' @name Structural
 #' @aliases structural package-rjbg-utils
