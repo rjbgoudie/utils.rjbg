@@ -67,7 +67,7 @@ changeLevels <- function(x,
             is.logical(verbose),
             length(verbose) == 1)
   colNames <- names(x)
-  
+
   # get the original levels, to avoid processing columns that do
   # not change
   actualLevelChanges <- levelChanges
@@ -76,32 +76,32 @@ changeLevels <- function(x,
   eval(parse(file = "", text = originalLevels))
   originalLevels <- levelChanges
   levelChanges <- actualLevelChanges
-  
+
   if (isTRUE(verbose)){
     cat("Processing: ")
   }
   availableCols <- colNames %in% names(levelChanges)
   colsToProcess <- colNames[availableCols]
-  
+
   nCols <- length(names(x))
   colSeq <- seq_len(nCols)
-  
+
   if (verbose){
     progress <- create_progress_bar("text")
     progress$init(nCols)
   }
-  
+
   out <- data.frame(lapply(colSeq, function(i){
     colName <- colNames[i]
-    
+
     if (verbose){
       progress$step()
     }
-    
+
     shouldProcessCol <- colName %in% colsToProcess
     levelsAreDifferent <- !identical(originalLevels[colName],
                                     levelChanges[colName])
-    
+
     if (shouldProcessCol && levelsAreDifferent){
       changeLevelsColName(colName, x, levelChanges, verbose)
     } else {
@@ -178,11 +178,11 @@ generateFactorRenamer <- function(x, newlines = "level", sort = F){
   stringComponents <- lapply(names(x),
                              levelsStringForColName, x, newlines, sort)
   out <- paste(unlist(stringComponents), collapse = "")
-  
+
   # remove trailing comma and newline
   nc <- nchar(out)
   out <- substr(out, 1, nc - 2)
-  
+
   cat("levelChanges <- list(\n")
   cat(out)
   cat("\n)")
@@ -210,18 +210,18 @@ changeLevelsColName <- function(colName, x, levelChanges, verbose = T){
             class(levelChanges) == "list",
             class(verbose)      == "logical",
             length(verbose)     == 1)
-  
+
   colCurrentLevels <- levels(x[, colName])
   colLevelChanges <- levelChanges[colName][[1]]
-  
+
   matchLevels <- match(colCurrentLevels, names(colLevelChanges))
-  
+
   # ensure all levels are covered
   stopifnot(
-    length(colLevelChanges) == length(colCurrentLevels), 
+    length(colLevelChanges) == length(colCurrentLevels),
     !any(is.na(matchLevels))
   )
-  
+
   sortedNewLevels <- colLevelChanges[matchLevels]
   levels(x[, colName]) <- sortedNewLevels
   x[, colName] <- factor(x[, colName], levels = unique(colLevelChanges))
@@ -250,19 +250,19 @@ is.consistent.changeLevels <- function(x, levelChanges, allowMissingCols){
   availableCols <- colNames %in% names(levelChanges)
   missingCols <- colNames[!availableCols]
   areMissingCols <- length(missingCols) > 0
-  
+
   colsOk <- TRUE
-  
+
   if (areMissingCols){
     if (class(allowMissingCols) == "character"){
       missingColsButOK <- missingCols %in% allowMissingCols
       missingColsButNotOK <- missingCols[!missingColsButOK]
-      
+
       areNotOKMissingCols <- length(missingColsButNotOK) > 0
       if (isTRUE(areNotOKMissingCols)){
         missingString <- paste(missingColsButNotOK, collapse = ", ")
         missingDput <- capture.output(dput(missingColsButNotOK))
-        msg <- paste("The following columns are missing from levelChanges:", 
+        msg <- paste("The following columns are missing from levelChanges:",
                      " ", missingString, "\n As a vector: ", missingDput,
                      sep = "")
         stop(msg)
@@ -274,9 +274,9 @@ is.consistent.changeLevels <- function(x, levelChanges, allowMissingCols){
     else {
       missingString <- paste(missingCols, collapse = ", ")
       missingDput <- capture.output(dput(missingCols))
-      msg <- paste("The following columns are missing from levelChanges: ", 
+      msg <- paste("The following columns are missing from levelChanges: ",
                    missingString, "\n As a vector: ", missingDput, sep = "")
-                  
+
       if (isTRUE(allowMissingCols)){
         warning(msg)
         colsOk <- TRUE
@@ -289,19 +289,19 @@ is.consistent.changeLevels <- function(x, levelChanges, allowMissingCols){
   } else {
     colsOk <- TRUE
   }
-  
+
   colsToProcess <- colNames[availableCols]
-  
+
   differences <- lapply(colsToProcess, function(colName){
     colCurrentLevels <- levels(x[, colName])
     colProposedLevels <- names(levelChanges[[colName]])
-    
+
     missingFromProposed <- setdiff(colCurrentLevels, colProposedLevels)
     unneededButProposed <- setdiff(colProposedLevels, colCurrentLevels)
-    
+
     nMissingFromProposed <- length(missingFromProposed)
     nUnneededButProposed <- length(unneededButProposed)
-    
+
     anyDifferences <- nMissingFromProposed + nUnneededButProposed > 0
     if (!anyDifferences){
       NA
@@ -311,34 +311,34 @@ is.consistent.changeLevels <- function(x, levelChanges, allowMissingCols){
            unneededButProposed = unneededButProposed)
     }
   })
-  
+
   all.na <- function(x) all(is.na(x))
   columnsWithUnmatchedLevels <- !sapply(differences, all.na)
   allColumnsOK <- !any(columnsWithUnmatchedLevels)
-  
+
   if (!allColumnsOK){
     problemCols <- colsToProcess[columnsWithUnmatchedLevels]
-    
+
     differencesSubset <- differences[columnsWithUnmatchedLevels]
     diffSeq <- seq_along(differencesSubset)
-    
+
     differencesString <- sapply(diffSeq, function(i){
       thisDifference <- differencesSubset[[i]]
       paste("* Variable: ", problemCols[i], "\n",
-            "Missing from proposed: ", thisDifference$missingFromProposed, 
-            "\nUnneeded in proposed: ", thisDifference$unneededButProposed, 
+            "Missing from proposed: ", thisDifference$missingFromProposed,
+            "\nUnneeded in proposed: ", thisDifference$unneededButProposed,
             "\n\n", sep = "")
     })
     differencesString <- paste(differencesString, collapse = "\n")
-    
+
     msg <- paste("There is a mismatch between the existing levels and the ",
-                 "levelChanges of the following columns: ", 
-                 paste(problemCols, collapse = ", "), 
+                 "levelChanges of the following columns: ",
+                 paste(problemCols, collapse = ", "),
                  "\n\n", differencesString,
                  sep = "")
     stop(msg)
   }
-  
+
   all(colsOk, allColumnsOK)
 }
 
@@ -359,17 +359,16 @@ is.consistent.changeLevels <- function(x, levelChanges, allowMissingCols){
 #'   described in \code{\link{generateFactorRenamer}}.
 levelsStringForColName <- function(colName,
                                    x,
-                                   newlines = "level", 
+                                   newlines = "level",
                                    sort = F){
-  
   # get the levels of the relevant column
   colLevels <- levels(x[, colName])
-  
+
   if (sort){
     o <- order(as.numeric(colLevels))
     colLevels <- colLevels[o]
   }
-  
+
   # build up the character variable
   quotedLevels <- sapply(colLevels, function(q){
     paste("\"", q, "\"", sep = "")
@@ -383,15 +382,15 @@ levelsStringForColName <- function(colName,
     warning("Unrecognised 'newline' value. Using default of 'level'")
     ",\n  "
   }
-  
+
   allQuotedLevels <- paste(quotedLevels, " = ", quotedLevels,
                            collapse = collapse_string, sep = "")
   allQuotedLevels <- paste("c(\n  ", allQuotedLevels, ")", sep = "")
-  
+
   # nc <- nchar(allQuotedLevels)
   # allQuotedLevels <- allQuotedLevels[-(nc-1:nc)]
   # cat("\t\"", colName, "\" = c(")
-  
+
   names(allQuotedLevels) <- colName
   allQuotedLevels
   paste(colName, " = ", allQuotedLevels, ",\n", sep = "")
