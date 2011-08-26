@@ -393,5 +393,5 @@ levelsStringForColName <- function(colName,
 
   names(allQuotedLevels) <- colName
   allQuotedLevels
-  paste(colName, " = ", allQuotedLevels, ",\n", sep = "")
+  paste("`", colName, "` = ", allQuotedLevels, ",\n", sep = "")
 }
