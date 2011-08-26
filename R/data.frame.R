@@ -49,7 +49,6 @@ intAsFDF <- function(x){
     class(x) == "data.frame",
     all(sapply(x, class) %in% c("integer", "numeric"))
   )
-  
   data.frame(lapply(x, as.factor))
 }
 
