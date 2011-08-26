@@ -68,7 +68,8 @@ as.data.frame2.table <- function(x){
   out <- list()
   for (i in seq_len(nrow(x))){
     n <- x[i, "Freq"]
-    out[[i]] <- x[, -f]
+    repeats <- lapply(seq_len(n), function(j) x[i, -f, drop = F])
+    out[[i]] <- do.call("rbind", repeats)
   }
   do.call("rbind", out)
 }
