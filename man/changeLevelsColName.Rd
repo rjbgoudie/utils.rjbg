@@ -2,8 +2,8 @@
 \alias{changeLevelsColName}
 \title{Relevel a column using a levelChanges list}
 \usage{
-  changeLevelsColName(colName, x, levelChanges, verbose =
-  T)
+  changeLevelsColName(colName, x, levelChanges,
+    verbose = T)
 }
 \arguments{
   \item{colName}{A character vector of length 1, indicating

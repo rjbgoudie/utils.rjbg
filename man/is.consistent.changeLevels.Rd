@@ -3,7 +3,7 @@
 \title{Check levelChanges consistency}
 \usage{
   is.consistent.changeLevels(x, levelChanges,
-  allowMissingCols)
+    allowMissingCols)
 }
 \arguments{
   \item{x}{a data frame}
@@ -15,9 +15,9 @@
   If it is a logical, it indicates whether to allow some
   columns of x not to be included in levelChanges. If TRUE,
   only a warning is issue if there are columns missing. If
-  FALSE, an error is given. If it is a character vector, it
-  contains the names of any columns that are allowed not to
-  be included in levelChanges.}
+  FALSE, an error is given.  If it is a character vector,
+  it contains the names of any columns that are allowed not
+  to be included in levelChanges.}
 }
 \value{
   The data from \code{x[, levelChanges]}, with as

@@ -2,10 +2,10 @@
 \alias{useOuterStrips2}
 \title{Put Strips on the Boundary of a Lattice Display}
 \usage{
-  useOuterStrips2(x, strip = strip.default2, strip.left =
-  strip.custom2(horizontal = horizontal), top = 1,
-  strip.lines = 1, strip.left.lines = strip.lines,
-  horizontal = F)
+  useOuterStrips2(x, strip = strip.default2,
+    strip.left = strip.custom2(horizontal = horizontal),
+    top = 1, strip.lines = 1,
+    strip.left.lines = strip.lines, horizontal = F)
 }
 \arguments{
   \item{x}{An object of class "trellis".}
@@ -14,7 +14,7 @@
   that would be appropriate strip and strip.left arguments
   respectively in a high level lattice function call (see
   xyplot). Note, however, that the strip function must be
-  of the form of strip.default2. The equivalent of
+  of the form of strip.default2.  The equivalent of
   strip.custom here is strip.custom2.}
 
   \item{strip.left}{As strip, for the strips down the

@@ -2,8 +2,7 @@ Package: utils.rjbg
 Imports:
     lattice,
     plyr,
-    testthat,
-    devtools
+    testthat
 Maintainer: R.J.B. Goudie <rjbgoudie@gmail.com>
 License: GPL
 Title: Miscellaneous utility functions
@@ -15,7 +14,8 @@ Depends:
     lattice,
     R (>= 2.9)
 Suggests:
-    roxygen2
+    roxygen2,
+    devtools
 Collate:
     'corr.R'
     'data.frame.R'

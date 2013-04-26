@@ -3,7 +3,7 @@
 \title{Relevel using a levelChanges list}
 \usage{
   changeLevels(x, levelChanges, allowMissingCols = F,
-  verbose = T)
+    verbose = T)
 }
 \arguments{
   \item{x}{a data frame}
@@ -15,9 +15,9 @@
   If it is a logical, it indicates whether to allow some
   columns of x not to be included in levelChanges. If TRUE,
   only a warning is issue if there are columns missing. If
-  FALSE, an error is given. If it is a character vector, it
-  contains the names of any columns that are allowed not to
-  be included in levelChanges.}
+  FALSE, an error is given.  If it is a character vector,
+  it contains the names of any columns that are allowed not
+  to be included in levelChanges.}
 
   \item{verbose}{A logical, indicating whether to show
   progress}
@@ -58,22 +58,22 @@ generateFactorRenamer(dat)
 # we can then change this into the following
 levelChanges <- list(
 agegp = c(
-"25-34" = "Young",
-"35-44" = "Young",
-"45-54" = "Middle-aged",
-"55-64" = "Middle-aged",
-"65-74" = "Old",
-"75+" = "Old"),
+  "25-34" = "Young",
+  "35-44" = "Young",
+  "45-54" = "Middle-aged",
+  "55-64" = "Middle-aged",
+  "65-74" = "Old",
+  "75+" = "Old"),
 alcgp = c(
-"0-39g/day" = "0-39g/day",
-"40-79" = "40-79",
-"80-119" = "80-119",
-"120+" = "120+"),
+  "0-39g/day" = "0-39g/day",
+  "40-79" = "40-79",
+  "80-119" = "80-119",
+  "120+" = "120+"),
 tobgp = c(
-"0-9g/day" = "Light",
-"10-19" = "Medium",
-"20-29" = "Heavy",
-"30+" = "Heavy")
+  "0-9g/day" = "Light",
+  "10-19" = "Medium",
+  "20-29" = "Heavy",
+  "30+" = "Heavy")
 )
 changeLevels(dat, levelChanges)
 # this return the new data frame

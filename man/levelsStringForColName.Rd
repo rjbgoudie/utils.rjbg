@@ -3,7 +3,7 @@
 \title{Generate factor renamer for column}
 \usage{
   levelsStringForColName(colName, x, newlines = "level",
-  sort = F)
+    sort = F)
 }
 \arguments{
   \item{colName}{A character vector of length 1, indicating

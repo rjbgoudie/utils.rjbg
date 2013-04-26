@@ -2,9 +2,9 @@
 \alias{paste.and.draw2}
 \title{function title}
 \usage{
-  paste.and.draw2(left, right, sep = " : ", horizontal =
-  TRUE, center = TRUE, showl = TRUE, showr = TRUE, gp =
-  lattice:::gpar())
+  paste.and.draw2(left, right, sep = " : ",
+    horizontal = TRUE, center = TRUE, showl = TRUE,
+    showr = TRUE, gp = lattice:::gpar())
 }
 \arguments{
   \item{left}{...}
