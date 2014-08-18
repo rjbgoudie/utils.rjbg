@@ -32,3 +32,4 @@ Collate:
     'useOuterStrips.R'
     'useOuterStrips2.R'
     'utils.rjbg.R'
+    'theme_rjbg_white.R'
