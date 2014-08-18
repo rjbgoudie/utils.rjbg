@@ -66,13 +66,14 @@ changeLevels <- function(x,
   stopifnot(is.consistent.changeLevels(x, levelChanges, allowMissingCols),
             is.logical(verbose),
             length(verbose) == 1)
+  if (require(utils)){
   colNames <- names(x)
 
   # get the original levels, to avoid processing columns that do
   # not change
   actualLevelChanges <- levelChanges
   xWithChanges <- x[, names(levelChanges)]
-  originalLevels <- capture.output(generateFactorRenamer(xWithChanges))
+  originalLevels <- utils:::capture.output(generateFactorRenamer(xWithChanges))
   eval(parse(file = "", text = originalLevels))
   originalLevels <- levelChanges
   levelChanges <- actualLevelChanges
@@ -113,6 +114,7 @@ changeLevels <- function(x,
   }
   names(out) <- colNames
   out
+  }
 }
 
 
@@ -246,6 +248,7 @@ changeLevelsColName <- function(colName, x, levelChanges, verbose = T){
 #' @return The data from \code{x[, levelChanges]}, with as prescribed by 
 #'   \code{levelChanges}.
 is.consistent.changeLevels <- function(x, levelChanges, allowMissingCols){
+  if (require(utils)){
   colNames <- names(x)
   availableCols <- colNames %in% names(levelChanges)
   missingCols <- colNames[!availableCols]
@@ -261,7 +264,7 @@ is.consistent.changeLevels <- function(x, levelChanges, allowMissingCols){
       areNotOKMissingCols <- length(missingColsButNotOK) > 0
       if (isTRUE(areNotOKMissingCols)){
         missingString <- paste(missingColsButNotOK, collapse = ", ")
-        missingDput <- capture.output(dput(missingColsButNotOK))
+        missingDput <- utils:::capture.output(dput(missingColsButNotOK))
         msg <- paste("The following columns are missing from levelChanges:",
                      " ", missingString, "\n As a vector: ", missingDput,
                      sep = "")
@@ -273,7 +276,7 @@ is.consistent.changeLevels <- function(x, levelChanges, allowMissingCols){
     }
     else {
       missingString <- paste(missingCols, collapse = ", ")
-      missingDput <- capture.output(dput(missingCols))
+      missingDput <- utils:::capture.output(dput(missingCols))
       msg <- paste("The following columns are missing from levelChanges: ",
                    missingString, "\n As a vector: ", missingDput, sep = "")
 
@@ -340,6 +343,7 @@ is.consistent.changeLevels <- function(x, levelChanges, allowMissingCols){
   }
 
   all(colsOk, allColumnsOK)
+}
 }
 
 #' Generate factor renamer for column
