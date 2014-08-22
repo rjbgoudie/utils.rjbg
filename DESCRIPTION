@@ -18,8 +18,8 @@ Suggests:
     devtools
 Collate:
     'corr.R'
-    'data.frame.R'
     'data.R'
+    'data.frame.R'
     'list.R'
     'logsumexp.R'
     'matrix.R'
@@ -29,7 +29,7 @@ Collate:
     'sets.R'
     'stack.R'
     'table.R'
+    'theme_rjbg_white.R'
     'useOuterStrips.R'
     'useOuterStrips2.R'
     'utils.rjbg.R'
-    'theme_rjbg_white.R'
