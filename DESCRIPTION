@@ -25,6 +25,7 @@ Collate:
     'matrix.R'
     'memory.R'
     'missing.R'
+    'plot.R'
     'profr.R'
     'sets.R'
     'stack.R'
