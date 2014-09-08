@@ -3,14 +3,14 @@ theme_rjbg_white <- function(base_size = 12, base_family = "") {
   # Starts with theme_grey and then modify some parts
   theme_grey(base_size = base_size, base_family = base_family) %+replace%
   theme(
-    axis.ticks        = element_line(colour = "grey80",
+    axis.ticks        = element_line(colour = "grey70",
                                      size = 0.25),
     legend.key        = element_rect(fill = "white",
-                                     colour = "grey80",
+                                     colour = "grey70",
                                      size = 0.25),
     panel.background  = element_rect(fill = "white", colour = NA),
     panel.border      = element_rect(fill = NA,
-                                     colour = "grey80",
+                                     colour = "grey70",
                                      size = 0.4),
     panel.grid.major  = element_line(colour = "grey85",
                                      size = 0.125),
@@ -22,6 +22,7 @@ theme_rjbg_white <- function(base_size = 12, base_family = "") {
     strip.text.y      = element_text(colour = "black",
                                      angle = -90),
     axis.title         = element_text(size = rel(0.8)),
+    axis.text         = element_text(colour = "gray60", size = rel(0.8)),
     legend.key = element_blank(),
     legend.background = element_blank()
     )
