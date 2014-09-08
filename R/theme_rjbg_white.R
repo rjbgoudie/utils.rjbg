@@ -1,7 +1,7 @@
 #' @export
-theme_rjbg_white <- function(base_size = 12, base_family = "") {
+theme_rjbg_white <- function(base_size = 12, base_family = "", grid = T) {
   # Starts with theme_grey and then modify some parts
-  theme_grey(base_size = base_size, base_family = base_family) %+replace%
+  t <- theme_grey(base_size = base_size, base_family = base_family) %+replace%
   theme(
     axis.ticks        = element_line(colour = "grey70",
                                      size = 0.25),
@@ -12,10 +12,6 @@ theme_rjbg_white <- function(base_size = 12, base_family = "") {
     panel.border      = element_rect(fill = NA,
                                      colour = "grey70",
                                      size = 0.4),
-    panel.grid.major  = element_line(colour = "grey85",
-                                     size = 0.125),
-    panel.grid.minor  = element_line(colour = "grey90",
-                                     size = 0.075),
     strip.background  = element_rect(fill = "white",
                                      size = NA),
     strip.text.x      = element_text(colour = "black"),
@@ -26,6 +22,17 @@ theme_rjbg_white <- function(base_size = 12, base_family = "") {
     legend.key = element_blank(),
     legend.background = element_blank()
     )
+  if (grid){
+    t %+replace%
+      theme(panel.grid.major  = element_line(colour = "grey75",
+                                             size = 0.125),
+            panel.grid.minor  = element_line(colour = "grey80",
+                                             size = 0.075))
+  } else {
+    t %+replace%
+      theme(panel.grid.major  = element_blank(),
+            panel.grid.minor = element_blank())
+  }
 }
 
 #' @export
